@@ -39,19 +39,98 @@ The data models represented below are modelled using mongoose.
 |Title|Type|Unique|Required|Description|
 |----|---|---|---|---|
 |description|`String`|`false`|`true`| This is content or body of the question. |
-|category|`[ObjectId]`|`false`|`true`| This an array of ids of categories a question belongs to. A question can belong to several categories e.g a category of [ 3, 4 ] means the question belongs to the categories with id 3 and 4 |
+|category|`ObjectId`|`false`|`true`| This is the id of the category the question belongs to. |
 
 ## Endpoints
 
 ### Categories
 * #### GET /categories
 This endpoints returns an array of all categories.
-Sample requests `curl `
+Sample response 
+
+```json
+{
+
+"categories" : [
+{ "_id" : "2", "name" : "Science" },
+{ "_id" : "6", "name" : "Art" }
+], 
+"success" : true
+}
+```
+
 * #### GET /categories/:id
+This endpoint returns a single category
+Sample response
+
+```json
+{
+"category" : { 
+"_id" : "2",
+"name" : "Science" 
+} 
+"success" : true
+}
+```
+
 * #### GET /categories/:id/questions
+It returns all questions under this category
+
+```json
+{
+"questions" : [
+{ "_id" : "2", "description" : "Who is the president of Nigeria", "category" : "7" },
+{ "_id" : "5", "description" : "When was Nigeria's independence", "category" : "7" } 
+],
+"success" : true
+}
+```
 * #### POST /categories
+It takes in a name property. 
+
+Sample request payload
+```json
+{ 
+"name" : "Geography"
+}
+```
+
+Sample response
+```json
+{ 
+  "category" : { "_id" : "4", "name" : "Geography" },
+  "success" : true
+}
+```
+
 * #### DELETE /categories/:id
+Deletes the category with an id of :id
+
+Sample response
+```json
+{ 
+  "deleted" : 5,
+  "success" : true
+}
+```
+
 * #### PATCH /categories/:id
+Edits a categories name
+
+Sample request payload
+```json
+{ 
+"name" : "Geography"
+}
+```
+
+Sample response
+```json
+{ 
+  "category" : { "_id" : "4", "name" : "Geography" },
+  "success" : true
+}
+```
 
 
 ### Questions
