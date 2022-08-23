@@ -18,7 +18,7 @@ Running the app in development allows you to have hot reloads. i.e reload on sav
 
 * To start the app in production, simply run
 ```bash
-npm run dev 
+npm start
 ```
 
 ### Environment variables
